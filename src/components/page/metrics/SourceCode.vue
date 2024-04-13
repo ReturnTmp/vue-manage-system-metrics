@@ -1,54 +1,85 @@
 <template>
-    <el-container class="body" style="height: 450px">
-        <el-aside width="400px" style="position: relative">
-      <el-tabs v-model="activeName" type="card">
-        <el-tab-pane label="源代码上传" name="first">
-          
-          <el-upload
-          class="upload-demo"
-          drag
-          :auto-upload="false"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :limit="1"
-          :file-list="fileList"
-          :on-change="onChange"
-          :on-exceed="onExceed">
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em>
-            <div class="el-upload__tip">请上传源代码的txt文件</div></div>
-          </el-upload>
-        </el-tab-pane>
-        <el-tab-pane label="源代码输入" name="second">
-          
-          <el-input type="textarea" :rows="12" placeholder="请输入需要分析的代码" v-model="textarea">
-      </el-input>
-        </el-tab-pane>
-      </el-tabs>
-            <el-button class="submit" type="primary" round @click="uploadFile">上传文件</el-button>
-        </el-aside>
-        <el-main>
-            <el-empty v-if="!tableData.length" description="请在左侧上传文件哦~"></el-empty>
-            <el-table v-if="tableData.length" 
-            :data="tableData"
-            style="width: 100%">
-            <el-table-column
-              prop="codeLines"
-              label="代码行数">
-            </el-table-column>
-            <el-table-column
-              prop="blankLines"
-              label="空白行">
-            </el-table-column>
-            <el-table-column
-              prop="commentLines"
-              label="注释行数">
-            </el-table-column>
-            <el-table-column
-              prop="cycleComplexity"
-              label="圈复杂度">
-            </el-table-column>
-          </el-table>
-        </el-main>
+    <el-container style='display: block'>
+        <el-card class="box-card" style='line-height: 30px'>
+            <h3>功能点度量页面</h3>
+            <p>在本页面设置各类功能点数量和系统特征，将根据功能点度量的方法得出度量结果</p>
+        </el-card>
+
+        <el-card class="box-card" style='width: 100%;display: flex'>
+
+            <el-upload
+                class="upload-demo"
+                :auto-upload="false"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :limit="1"
+                :file-list="fileList"
+                :on-change="onChange"
+                :on-exceed="onExceed">
+                <div style='display: flex'>
+                    <i class="el-icon-document-checked" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+                    <div>点击选择要上传的文件（txt 文件）</div>
+                </div>
+            </el-upload>
+            <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>
+        </el-card>
+
+        <el-card class='box-card'>
+
+            <el-empty v-if="!tableData.length" description="请先上传文件"></el-empty>
+
+            <el-row v-if='tableData.length'>
+                <el-col :span="4" class='col-box'>
+                    <el-card :body-style="{ padding: '0px' }">
+                        <div style="padding: 14px;">
+                            <i class="el-icon-s-data" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+
+                            <span style='font-size: 20px;font-weight: bold'>代码行数</span>
+                            <div class="bottom clearfix">
+                                {{tableData[0].codeLines}}
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+                <el-col :span="4" class='col-box'>
+                    <el-card :body-style="{ padding: '0px' }">
+                        <div style="padding: 14px;">
+                            <i class="el-icon-s-marketing" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+
+                            <span style='font-size: 20px;font-weight: bold'>空白行数</span>
+                            <div class="bottom clearfix">
+                                {{tableData[0].blankLines}}
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+                <el-col :span="4" class='col-box'>
+                    <el-card :body-style="{ padding: '0px' }">
+                        <div style="padding: 14px;">
+                            <i class="el-icon-s-flag" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+
+                            <span style='font-size: 20px;font-weight: bold'>注释行数</span>
+                            <div class="bottom clearfix">
+                                {{tableData[0].commentLines}}
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+                <el-col :span="4" class='col-box'>
+                    <el-card :body-style="{ padding: '0px' }">
+                        <div style="padding: 14px;">
+                            <i class="el-icon-s-opportunity" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+
+                            <span style='font-size: 20px;font-weight: bold'>圈复杂度</span>
+                            <div class="bottom clearfix">
+                                {{tableData[0].cycleComplexity}}
+                            </div>
+                        </div>
+                    </el-card>
+                </el-col>
+            </el-row>
+
+
+        </el-card>
     </el-container>
 </template>
 
@@ -108,12 +139,39 @@ export default {
 </script>
 
 <style scoped>
-.body {
-    margin: 0 auto;
-}
-.submit {
+
+.box-card {
     margin-top: 20px;
-    margin-left: 130px;
+}
+
+/deep/ .el-upload{
+    width: 320px;
+    height: 40px;
+    line-height: 40px;
+}
+.col-box{
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 17%;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
 }
 
 </style>
