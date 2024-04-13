@@ -41,6 +41,10 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+import axios from 'axios'; // 引入axios
+// 挂载到vue原型链上
+Vue.prototype.axios = axios;
+
 new Vue({
     router,
     i18n,
