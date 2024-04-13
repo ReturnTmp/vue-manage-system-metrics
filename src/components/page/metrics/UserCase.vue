@@ -1,235 +1,239 @@
 <template>
-  <el-container class="body">
-    <el-aside width="400px" class="aside">
-      <el-upload
-        class="upload-demo"
-        drag
-        :auto-upload="false"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :limit="1"
-        :file-list="fileList"
-        :on-change="onChange"
-        :on-exceed="onExceed"
-      >
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip">请上传用例图的oom文件</div>
-      </el-upload>
-      <el-button class="submit" type="primary" round @click="uploadFile"
-        >上传文件</el-button
-      >
-    </el-aside>
-    <el-main style="overflow: auto; height: 600px">
+  <el-container style='display: block'>
+      <el-card class="box-card" style='line-height: 30px'>
+          <h3>功能点度量页面</h3>
+          <p>在本页面设置各类功能点数量和系统特征，将根据功能点度量的方法得出度量结果</p>
+      </el-card>
 
-      <el-empty
-        v-if="!Object.keys(backData).length"
-        description="请在左侧上传文件哦~"
-      ></el-empty>
-      <div class="getInfo" v-if="Object.keys(backData).length">
-        <el-steps :active="active" finish-status="success">
-          <el-step
-            title="角色"
-            description="计算未调整前的角色权重UAW"
-          ></el-step>
-          <el-step
-            title="用例"
-            description="计算未调整前的用例权重UUC"
-          ></el-step>
-          <el-step
-            title="技术复杂因素"
-            description="技术会对软件规模造成影响"
-          ></el-step>
-          <el-step
-            title="环境因素"
-            description="环境也会对软件规模造成影响"
-          ></el-step>
-          <el-step
-            title="工作量与工作时间"
-            description="计算工作量与所需开发工作时间"
-          ></el-step>
-        </el-steps>
-        <el-card>
-          <!-- 角色 -->
-          <div v-if="active == 0">
-            <el-row style="margin-bottom:20px">
-              <el-table
-                :data="descTable.actor"
-                style="width: 100%"
+      <el-card class="box-card" style='width: 100%;display: flex'>
+
+          <el-upload
+              class="upload-demo"
+              :auto-upload="false"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :limit="1"
+              :file-list="fileList"
+              :on-change="onChange"
+              :on-exceed="onExceed">
+              <div style='display: flex'>
+                  <i class="el-icon-document-checked" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+                  <div>点击选择要上传的文件（oom 文件）</div>
+              </div>
+          </el-upload>
+          <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>
+      </el-card>
+
+
+      <el-card class='box-card'>
+
+          <el-empty
+              v-if="!Object.keys(backData).length"
+              description="请先上传文件"
+          ></el-empty>
+          <div class="getInfo" v-if="Object.keys(backData).length">
+              <el-steps :active="active" finish-status="success">
+                  <el-step
+                      title="角色"
+                      description="计算未调整前的角色权重UAW"
+                  ></el-step>
+                  <el-step
+                      title="用例"
+                      description="计算未调整前的用例权重UUC"
+                  ></el-step>
+                  <el-step
+                      title="技术复杂因素"
+                      description="技术会对软件规模造成影响"
+                  ></el-step>
+                  <el-step
+                      title="环境因素"
+                      description="环境也会对软件规模造成影响"
+                  ></el-step>
+                  <el-step
+                      title="工作量与工作时间"
+                      description="计算工作量与所需开发工作时间"
+                  ></el-step>
+              </el-steps>
+              <el-card>
+                  <!-- 角色 -->
+                  <div v-if="active == 0">
+                      <el-row style="margin-bottom:20px">
+                          <el-table
+                              :data="descTable.actor"
+                              style="width: 100%"
+                          >
+                              <el-table-column prop="actorType" label="角色类别" width="100px">
+                              </el-table-column>
+                              <el-table-column prop="desc" label="说明">
+                              </el-table-column>
+                              <el-table-column prop="weight" label="权重" width="100px">
+                              </el-table-column>
+                          </el-table>
+                      </el-row>
+                      <h3>请根据上表说明选择角色的复杂度：</h3>
+                      <el-row  v-for="(item, index) in backData.actor" :key="index" style="margin-bottom:10px">
+                          <el-col :span="4">{{ item.name }}:</el-col>
+                          <el-col :span="20">
+                              <el-radio-group v-model="item.weight">
+                                  <el-radio :label="1">简单</el-radio>
+                                  <el-radio :label="2">普通</el-radio>
+                                  <el-radio :label="3">复杂</el-radio>
+                              </el-radio-group>
+                          </el-col>
+                      </el-row>
+                  </div>
+                  <!-- 用例 -->
+                  <div v-if="active == 1">
+                      <el-row style="margin-bottom:20px">
+                          <el-table
+                              :data="descTable.usercase"
+                              style="width: 100%"
+                          >
+                              <el-table-column prop="actorType" label="角色类别" width="100px">
+                              </el-table-column>
+                              <el-table-column prop="desc" label="说明">
+                              </el-table-column>
+                              <el-table-column prop="weight" label="权重" width="100px">
+                              </el-table-column>
+                          </el-table>
+                      </el-row>
+                      <h3>请根据上表说明选择用例的复杂度：</h3>
+                      <el-row v-for="(item, index) in backData.userCase" :key="index">
+                          <el-col>{{ item.name }}:</el-col>
+                          <el-col>
+                              <el-radio-group v-model="item.weight">
+                                  <el-radio :label="5">简单</el-radio>
+                                  <el-radio :label="10">普通</el-radio>
+                                  <el-radio :label="15">复杂</el-radio>
+                              </el-radio-group>
+                          </el-col>
+                      </el-row>
+                  </div>
+                  <!-- 技术复杂性因素 -->
+                  <div v-if="active == 2">
+                      <!-- <el-row style="margin-bottom:20px">
+                              <el-table
+                              :data="descTable.tcf"
+                            >
+                              <el-table-column prop="actorType" label="技术复杂性Ti" width="120px">
+                              </el-table-column>
+                              <el-table-column prop="desc" label="说明">
+                              </el-table-column>
+                              <el-table-column prop="weight" label="权重WF" width="100px">
+                              </el-table-column>
+                            </el-table>
+                        </el-row> -->
+                      <el-row>
+                          <h3>请选择您认为系统中存在的技术复杂性因素：</h3>
+                          <p>影响程度说明：不选择表示不存在或者没有影响；1偶尔；2轻微；3中等；4显著；5强烈</p>
+                          <!-- <el-checkbox-group v-model="checkTCFGroup">
+                              <el-checkbox-button v-for="(item,index) in descTable.tcf" :label="item" :key="index">{{item.desc}}</el-checkbox-button>
+                          </el-checkbox-group> -->
+                      </el-row>
+                      <el-row>
+                          <div v-for="(item,index) in descTable.tcf" :key="index">
+                              <i>{{item.desc}}</i>
+                              <el-rate
+                                  v-model="item.level"
+                                  show-text
+                                  :texts="['偶尔','轻微','中等','显著','强烈']">
+                              </el-rate>
+                          </div>
+                      </el-row>
+                  </div>
+                  <!-- 技术复杂性因素 -->
+                  <div v-if="active == 3">
+                      <!-- <el-row style="margin-bottom:20px">
+                          <el-table
+                            :data="descTable.ef"
+                            style="width: 100%"
+                          >
+                            <el-table-column prop="actorType" label="环境复杂性Fi" width="200px">
+                            </el-table-column>
+                            <el-table-column prop="desc" label="说明">
+                            </el-table-column>
+                            <el-table-column prop="weight" label="权重Wi" width="100px">
+                            </el-table-column>
+                          </el-table>
+                        </el-row> -->
+                      <el-row>
+                          <h3>请选择您认为系统中存在的环境复杂性因素：</h3>
+                          <p>影响程度说明：不选择表示不存在或者没有影响；1偶尔；2轻微；3中等；4显著；5强烈</p>
+                          <!-- <el-checkbox-group v-model="checkTCFGroup">
+                              <el-checkbox-button v-for="(item,index) in descTable.tcf" :label="item" :key="index">{{item.desc}}</el-checkbox-button>
+                          </el-checkbox-group> -->
+                      </el-row>
+                      <el-row>
+                          <div v-for="(item,index) in descTable.ef" :key="index">
+                              <i>{{item.desc}}</i>
+                              <el-rate
+                                  v-model="item.level"
+                                  show-text
+                                  :texts="['偶尔','轻微','中等','显著','强烈']">
+                              </el-rate>
+                          </div>
+                      </el-row>
+                  </div>
+                  <!-- 工作量与时间 -->
+                  <div v-if="active==4">
+                      <el-row :gutter="20">
+                          <el-col :span="10">
+                              <h4 style="margin:auto;margin-top:10px ">请输入一个用例点花费的时间（单位：人时/UPC)</h4>
+                          </el-col>
+                          <el-col :span="14">
+                              <el-input
+                                  class="input"
+                                  v-model="UCTime"
+                                  placeholder="请输入一个用例点花费的时间（单位：人时/UPC)"
+                              ></el-input>
+                          </el-col>
+                      </el-row>
+                      <el-row :gutter="20">
+                          <el-col :span="10">
+                              <h4 style="margin:auto;margin-top:10px ">请输入一个月的工作时间（单位：小时)</h4>
+                          </el-col>
+                          <el-col :span="14">
+                              <el-input
+                                  class="input"
+                                  v-model="workTime"
+                                  placeholder="请输入一个月的工作时间（单位：小时)"
+                              ></el-input>
+                          </el-col>
+                      </el-row>
+                  </div>
+                  <!-- 结果 -->
+                  <div v-if="active==5">
+                      <h3>用例点度量结果如下</h3>
+                      <el-table v-if="tableData.length" :data="tableData" style="width: 100%">
+                          <el-table-column prop="UAW" label="UAW"> </el-table-column>
+                          <el-table-column prop="UUC" label="UUC"> </el-table-column>
+                          <el-table-column prop="UUCP" label="UUCP"> </el-table-column>
+                          <el-table-column prop="TCF" label="TCF"> </el-table-column>
+                          <el-table-column prop="EF" label="EF"> </el-table-column>
+                      </el-table>
+                      <p><strong>用例点 UPC:</strong> {{ UPC }}</p>
+
+                      <el-row>
+                          实现该类需要的工作量Effort（单位：小时）：
+                          <el-input v-model="effort" :disabled="true"> </el-input>
+                      </el-row>
+                      <el-row style="margin-top: 10px">
+                          实现该类需要（单位：人月）：
+                          <el-input v-model="time" :disabled="true"> </el-input>
+                      </el-row>
+                  </div>
+              </el-card>
+              <el-button v-if="active!=5"
+                         style="margin-top: 12px; margin-left: 400px; float: left"
+                         @click="prev"
+              >上一步</el-button
               >
-                <el-table-column prop="actorType" label="角色类别" width="100px">
-                </el-table-column>
-                <el-table-column prop="desc" label="说明">
-                </el-table-column>
-                <el-table-column prop="weight" label="权重" width="100px">
-                </el-table-column>
-              </el-table>
-            </el-row>
-            <h3>请根据上表说明选择角色的复杂度：</h3>
-            <el-row  v-for="(item, index) in backData.actor" :key="index" style="margin-bottom:10px">
-              <el-col :span="4">{{ item.name }}:</el-col>
-              <el-col :span="20">
-                <el-radio-group v-model="item.weight">
-                  <el-radio :label="1">简单</el-radio>
-                  <el-radio :label="2">普通</el-radio>
-                  <el-radio :label="3">复杂</el-radio>
-                </el-radio-group>
-              </el-col>
-            </el-row>
+              <el-button v-if="active!=5"
+                         style="margin-top: 12px; margin-right: 400px; float: right"
+                         @click="next"
+              >下一步</el-button
+              >
           </div>
-          <!-- 用例 -->
-          <div v-if="active == 1">
-            <el-row style="margin-bottom:20px">
-                <el-table
-                  :data="descTable.usercase"
-                  style="width: 100%"
-                >
-                  <el-table-column prop="actorType" label="角色类别" width="100px">
-                  </el-table-column>
-                  <el-table-column prop="desc" label="说明">
-                  </el-table-column>
-                  <el-table-column prop="weight" label="权重" width="100px">
-                  </el-table-column>
-                </el-table>
-              </el-row>
-              <h3>请根据上表说明选择用例的复杂度：</h3>
-            <el-row v-for="(item, index) in backData.userCase" :key="index">
-              <el-col>{{ item.name }}:</el-col>
-              <el-col>
-                <el-radio-group v-model="item.weight">
-                  <el-radio :label="5">简单</el-radio>
-                  <el-radio :label="10">普通</el-radio>
-                  <el-radio :label="15">复杂</el-radio>
-                </el-radio-group>
-              </el-col>
-            </el-row>
-          </div>
-          <!-- 技术复杂性因素 -->
-          <div v-if="active == 2">
-            <!-- <el-row style="margin-bottom:20px">
-                    <el-table
-                    :data="descTable.tcf"
-                  >
-                    <el-table-column prop="actorType" label="技术复杂性Ti" width="120px">
-                    </el-table-column>
-                    <el-table-column prop="desc" label="说明">
-                    </el-table-column>
-                    <el-table-column prop="weight" label="权重WF" width="100px">
-                    </el-table-column>
-                  </el-table>
-              </el-row> -->
-                <el-row>
-                    <h3>请选择您认为系统中存在的技术复杂性因素：</h3>
-                    <p>影响程度说明：不选择表示不存在或者没有影响；1偶尔；2轻微；3中等；4显著；5强烈</p>
-                    <!-- <el-checkbox-group v-model="checkTCFGroup">
-                        <el-checkbox-button v-for="(item,index) in descTable.tcf" :label="item" :key="index">{{item.desc}}</el-checkbox-button>
-                    </el-checkbox-group> -->
-                </el-row>
-                <el-row>
-                    <div v-for="(item,index) in descTable.tcf" :key="index">
-                        <i>{{item.desc}}</i>
-                        <el-rate
-                            v-model="item.level"
-                            show-text
-                            :texts="['偶尔','轻微','中等','显著','强烈']">
-                            </el-rate>
-                    </div>
-                </el-row>
-          </div>
-          <!-- 技术复杂性因素 -->
-          <div v-if="active == 3">
-            <!-- <el-row style="margin-bottom:20px">
-                <el-table
-                  :data="descTable.ef"
-                  style="width: 100%"
-                >
-                  <el-table-column prop="actorType" label="环境复杂性Fi" width="200px">
-                  </el-table-column>
-                  <el-table-column prop="desc" label="说明">
-                  </el-table-column>
-                  <el-table-column prop="weight" label="权重Wi" width="100px">
-                  </el-table-column>
-                </el-table>
-              </el-row> -->
-              <el-row>
-                <h3>请选择您认为系统中存在的环境复杂性因素：</h3>
-                <p>影响程度说明：不选择表示不存在或者没有影响；1偶尔；2轻微；3中等；4显著；5强烈</p>
-                <!-- <el-checkbox-group v-model="checkTCFGroup">
-                    <el-checkbox-button v-for="(item,index) in descTable.tcf" :label="item" :key="index">{{item.desc}}</el-checkbox-button>
-                </el-checkbox-group> -->
-            </el-row>
-            <el-row>
-                <div v-for="(item,index) in descTable.ef" :key="index">
-                    <i>{{item.desc}}</i>
-                    <el-rate
-                        v-model="item.level"
-                        show-text
-                        :texts="['偶尔','轻微','中等','显著','强烈']">
-                        </el-rate>
-                </div>
-            </el-row>
-          </div>
-          <!-- 工作量与时间 -->
-          <div v-if="active==4">
-            <el-row :gutter="20">
-                <el-col :span="10">
-                    <h4 style="margin:auto;margin-top:10px ">请输入一个用例点花费的时间（单位：人时/UPC)</h4>
-                </el-col>
-                <el-col :span="14">
-                    <el-input
-                      class="input"
-                      v-model="UCTime"
-                      placeholder="请输入一个用例点花费的时间（单位：人时/UPC)"
-                    ></el-input>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="10">
-                  <h4 style="margin:auto;margin-top:10px ">请输入一个月的工作时间（单位：小时)</h4>
-                </el-col>
-                <el-col :span="14">
-                  <el-input
-                    class="input"
-                    v-model="workTime"
-                    placeholder="请输入一个月的工作时间（单位：小时)"
-                  ></el-input>
-                </el-col>
-              </el-row>
-          </div>
-          <!-- 结果 -->
-          <div v-if="active==5">
-            <h3>用例点度量结果如下</h3>
-            <el-table v-if="tableData.length" :data="tableData" style="width: 100%">
-              <el-table-column prop="UAW" label="UAW"> </el-table-column>
-              <el-table-column prop="UUC" label="UUC"> </el-table-column>
-              <el-table-column prop="UUCP" label="UUCP"> </el-table-column>
-              <el-table-column prop="TCF" label="TCF"> </el-table-column>
-              <el-table-column prop="EF" label="EF"> </el-table-column>
-            </el-table>
-            <p><strong>用例点 UPC:</strong> {{ UPC }}</p>
-    
-                <el-row>
-                  实现该类需要的工作量Effort（单位：小时）：
-                  <el-input v-model="effort" :disabled="true"> </el-input>
-                </el-row>
-                <el-row style="margin-top: 10px">
-                  实现该类需要（单位：人月）：
-                  <el-input v-model="time" :disabled="true"> </el-input>
-                </el-row>
-          </div>
-        </el-card>
-        <el-button v-if="active!=5"
-          style="margin-top: 12px; margin-left: 400px; float: left"
-          @click="prev"
-          >上一步</el-button
-        >
-        <el-button v-if="active!=5"
-          style="margin-top: 12px; margin-right: 400px; float: right"
-          @click="next"
-          >下一步</el-button
-        >
-      </div>
-
-    </el-main>
+      </el-card>
   </el-container>
 </template>
 
@@ -485,17 +489,14 @@ export default {
 </script>
 
 <style scoped>
-.body {
-  margin: 0 auto;
-}
-.aside {
-  position: relative;
-}
-.submit {
+.box-card {
     margin-top: 20px;
-    margin-left: 130px;
 }
-p {
-  text-align: center;
+
+/deep/ .el-upload{
+    width: 320px;
+    height: 40px;
+    line-height: 40px;
 }
+
 </style>

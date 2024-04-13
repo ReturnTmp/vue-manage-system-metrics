@@ -22,7 +22,7 @@
         </el-aside>
         <el-main style="overflow:auto; height:400px">
 
-            <el-empty v-if="!tableData.length" description="请在左侧上传文件哦~"></el-empty>
+            <el-empty v-if="!tableData.length" description="请先上传文件"></el-empty>
             <el-table v-if="tableData.length"
                       :data="tableData"
                       style="width: 100%">
