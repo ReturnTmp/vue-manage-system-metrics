@@ -9,14 +9,13 @@
         <el-card class="box-card" style='width: 100%'>
             <el-upload
                 class="upload-demo"
-                drag
                 :auto-upload="false"
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :limit="1"
                 :file-list="fileList"
                 :on-change="onChange"
                 :on-exceed="onExceed">
-                <i class="el-icon-upload"></i>
+                <i class="el-icon-document-checked" style='font-size: 70px;margin-top: 20px;margin-bottom: 20px'></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 <div class="el-upload__tip">请上传xml文件</div>
             </el-upload>
