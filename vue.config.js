@@ -3,8 +3,9 @@ module.exports = {
     assetsDir: 'static',
     productionSourceMap: false,
     devServer: {
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 8090,
+        disableHostCheck: true,
         proxy: {
             '/api':{
                 target:'http://localhost:8080',
