@@ -9,13 +9,13 @@
         <el-card class="box-card" style='width: 100%;display: flex'>
 
             <el-upload
-                       class="upload-demo"
-                       :auto-upload="false"
-                       action="https://jsonplaceholder.typicode.com/posts/"
-                       :limit="1"
-                       :file-list="fileList"
-                       :on-change="onChange"
-                       :on-exceed="onExceed">
+                class="upload-demo"
+                :auto-upload="false"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :limit="1"
+                :file-list="fileList"
+                :on-change="onChange"
+                :on-exceed="onExceed">
                 <div style='display: flex'>
                     <i class="el-icon-document-checked" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
                     <div>点击选择要上传的文件（xml 文件）</div>
@@ -36,22 +36,28 @@
                 <p style='margin-top: 20px'>当前计算UFC的结果为：{{UFCNumber}}</p>
                 <el-divider></el-divider>
                 <el-table :data="tableDataUFC" border style="width: 100%">
-                    <el-table-column prop="date" label="日期" width="180">
+                    <el-table-column prop="measurementElements" label="测量元素" width="180">
                         <template slot-scope="scope">
-                            <input type="text" v-model="scope.row.date" v-show="scope.row.iseditor" />
-                            <span v-show="!scope.row.iseditor">{{scope.row.date}}</span>
+                            <input type="text" v-model="scope.row.measurementElements" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.measurementElements}}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" label="姓名" width="180">
+                    <el-table-column prop="Simple" label="Simple" width="180">
                         <template slot-scope="scope">
-                            <input type="text" v-model="scope.row.name" v-show="scope.row.iseditor" />
-                            <span v-show="!scope.row.iseditor">{{scope.row.name}}</span>
+                            <input type="text" v-model="scope.row.Simple" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.Simple}}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="address" label="地址">
+                    <el-table-column prop="Average" label="Average">
                         <template slot-scope="scope">
-                            <input type="text" v-model="scope.row.address" v-show="scope.row.iseditor" />
-                            <span v-show="!scope.row.iseditor">{{scope.row.address}}</span>
+                            <input type="text" v-model="scope.row.Average" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.Average}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="Complex" label="Complex">
+                        <template slot-scope="scope">
+                            <input type="text" v-model="scope.row.Complex" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.Complex}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="180">
@@ -60,20 +66,53 @@
                             <el-button type="danger" @click="save(scope.row)">保存</el-button>
                         </template>
                     </el-table-column>
-                    </el-table>
+                </el-table>
 
-                    <el-divider></el-divider>
+                <el-divider></el-divider>
                 <div  style='display: flex;justify-content:center'>
                     <el-button type="primary" @click="stepNumber = 2">下一步</el-button>
                 </div>
             </div>
 
             <div v-if='stepNumber == 2'>
-                <div style='display: flex;justify-content:center'>
-                    <el-button type="primary" @click="stepNumber = 1">上一步</el-button>
-                    <el-button type="primary" @click="stepNumber = 3">下一步</el-button>
+                <p style='margin-top: 20px'>当前计算VAF的结果为：{{VAFNumber}}</p>
+                <el-divider></el-divider>
+                <el-table :data="tableDataVAF" border style="width: 100%">
+                    <el-table-column prop="number" label="序号" width="300">
+                        <template slot-scope="scope">
+                            <input type="text" v-model="scope.row.number" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.number}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="factor" label="技术复杂度因子" width="300">
+                        <template slot-scope="scope">
+                            <input type="text" v-model="scope.row.factor" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.factor}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="degree" label="影响程度">
+                        <template slot-scope="scope">
+                            <input type="text" v-model="scope.row.degree" v-show="scope.row.iseditor" />
+                            <span v-show="!scope.row.iseditor">{{scope.row.degree}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="180">
+                        <template slot-scope="scope">
+                            <el-button type="warning" @click="edit(scope.row, scope)">编辑</el-button>
+                            <el-button type="danger" @click="save(scope.row)">保存</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+                <el-divider></el-divider>
+                <div  style='display: flex;justify-content:center'>
+                    <div style='display: flex;justify-content:center'>
+                        <el-button type="primary" @click="stepNumber = 1">上一步</el-button>
+                        <el-button type="primary" @click="stepNumber = 3">下一步</el-button>
+                    </div>
                 </div>
             </div>
+
 
             <div v-if='stepNumber == 3'>
                 <div style='justify-content:center'>
@@ -210,32 +249,71 @@ export default {
             classList: [],
             tableData: [],
             UFCNumber: 218,
+            VAFNumber: 1.1,
             stepNumber: 1,
             tableDataUFC: [
                 {
-                    date: "2016-05-02",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1518 弄",
+                    measurementElements: "外部输入",
+                    Simple: "1",
+                    Average: "2",
+                    Complex: "3",
                     iseditor: false
                 },
                 {
-                    date: "2016-05-04",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1517 弄",
+                    measurementElements: "外部输出",
+                    Simple: "2",
+                    Average: "2",
+                    Complex: "1",
                     iseditor: false
                 },
                 {
-                    date: "2016-05-01",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1519 弄",
+                    measurementElements: "外部查询",
+                    Simple: "3",
+                    Average: "1",
+                    Complex: "2",
                     iseditor: false
                 },
                 {
-                    date: "2016-05-03",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
+                    measurementElements: "内部文件",
+                    Simple: "5",
+                    Average: "6",
+                    Complex: "3",
+                    iseditor: false
+                },
+                {
+                    measurementElements: "外部接口",
+                    Simple: "1",
+                    Average: "2",
+                    Complex: "1",
                     iseditor: false
                 }
+            ],
+            tableDataVAF: [
+                {
+                    number: "1",
+                    factor: "可靠的备份与恢复",
+                    degree: "4",
+                    iseditor: false
+                },
+                {
+                    number: "2",
+                    factor: "数据通信",
+                    degree: "5",
+                    iseditor: false
+                },
+                {
+                    number: "3",
+                    factor: "分布式的功能",
+                    degree: "3",
+                    iseditor: false
+                },
+                {
+                    number: "4",
+                    factor: "性能",
+                    degree: "3",
+                    iseditor: false
+                }
+
             ],
             metricsResult: 239.8
         }
@@ -248,14 +326,14 @@ export default {
         },
         async uploadFile(){
             let formData = new FormData();
-                for (let i in this.fileList) {
-                    formData.append('file', this.fileList[i].raw);
-                }
+            for (let i in this.fileList) {
+                formData.append('file', this.fileList[i].raw);
+            }
             // 上传文件
             let res = await this.axios({
-              url:'http://localhost:8080/xml/uploadxml',
-              method: 'post',
-              data: formData
+                url:'http://localhost:8080/xml/uploadxml',
+                method: 'post',
+                data: formData
             });
             console.log('上传文件',res);
             // 请求后台处理结果
