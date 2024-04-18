@@ -72,15 +72,20 @@ export default {
                     title: '源代码度量'
                 },
                 {
+                    icon: 'el-icon-s-open',
+                    index: 'InfoFlow',
+                    title: '信息流度量'
+                },
+                {
                     icon: 'el-icon-lx-emoji',
                     index: 'ControlFlow',
                     title: '控制流结构度量'
                 },
-                {
-                    icon: 'el-icon-pie-chart',
-                    index: 'DataFlow',
-                    title: '数据流结构度量'
-                },
+                // {
+                //     icon: 'el-icon-pie-chart',
+                //     index: 'DataFlow',
+                //     title: '数据流结构度量'
+                // },
                 {
                     icon: 'el-icon-lx-global',
                     index: 'OOMMetrics',

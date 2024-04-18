@@ -77,13 +77,39 @@
                     </el-card>
                 </el-col>
             </el-row>
-
-
         </el-card>
+
+        <el-card class="box-card" v-if='tableData.length' style='width: 100%'>
+            <div style="height:500px;width: 100%;" ref="main"></div>
+        </el-card>
+<!--        根据注释密度给出合理帮助建议-->
+        <el-card class="box-card" v-if='tableData.length'>
+<!--            <el-collapse @change="handleChange">-->
+<!--                <el-collapse-item title="HELP" name="1">-->
+<!--                </el-collapse-item>-->
+<!--            </el-collapse>-->
+            <div v-if='tableData[0].commentDensity < 0.1'>
+                <p>
+                    注释不够提示：您的代码注释比例不高。注释比例不高可能会带来代码理解难度增加、维护成本增加、沟通成本增加和测试和验证困难等问题。注释是代码可维护性和可理解性的重要组成部分。所以说适当、精准的注释对于维护大型或复杂项目至关重要，您可以考虑适当添加注释来提高您的代码注释比例。
+                </p>
+            </div>
+            <div v-else-if='tableData[0].commentDensity > 0.5'>
+                <p>
+                    注释比例过高提示：您的代码注释比例过高。过多的注释可能会分散代码阅读者的注意力，使得他们的关注点不在代码上而转移到注释上面，从而可能使他们忽略代码本身的问题。同时，过多的注释也会增加代码阅读者理解代码的成本，大量的注释可能会淹没实际的代码，使得阅读和理解代码本身变得更加困难。您可以考虑适当精简代码来改善这个问题。
+                </p>
+            </div>
+            <div v-else>
+                <p>
+                    注释比例良好提示：您的代码注释比例良好。当代码的注释比例良好时，注释既充分又高效地传达了代码的意图和复杂性。良好的注释提高了代码的可读性，简化了代码的维护，提高了项目的开发效率，有利于代码的可持续发展。
+                </p>
+            </div>
+        </el-card>
+
     </el-container>
 </template>
 
 <script>
+import * as echarts from 'echarts';
 export default {
     name:'SourceCode',
     data() {
@@ -95,6 +121,55 @@ export default {
         }
     },
     methods: {
+        drawLine() {
+            const myChart = echarts.init(this.$refs.main);
+            var option = {
+                title: {
+                    text: '注释密度：'+ (this.tableData[0].commentDensity * 100).toFixed(3) + '%',
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    top: '5%'
+                },
+                label: {
+                    show: false
+                },
+                series: [
+                    {
+                        name: '源代码度量',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: 40,
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            { value: this.tableData[0].codeLines - this.tableData[0].commentLines, name: '未注释行数' },
+                            { value: this.tableData[0].commentLines, name: '注释行数' },
+                        ]
+                    }
+                ]
+            };
+            myChart.setOption(option)
+        },
         onChange(file,fileList){
             console.log(file);
             console.log(fileList);
@@ -128,6 +203,11 @@ export default {
                             method: 'get',
                         })
             this.tableData=[{...data.data}];
+            console.log('tableData',this.tableData);
+            // 雷达图
+            this.$nextTick(()=>{
+                this.drawLine();
+            })
         },
         // 溢出则替换
         onExceed(files,fileList){

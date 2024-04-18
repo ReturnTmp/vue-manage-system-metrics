@@ -8,7 +8,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/Class'
         },
         {
             path: '/',
@@ -34,6 +34,11 @@ export default new Router({
                     path: '/SourceCode',
                     component: () => import(/* webpackChunkName: "SourceCode" */ '../components/page/metrics/SourceCode.vue'),
                     meta: { title: '源代码度量' }
+                },
+                {
+                    path: '/InfoFlow',
+                    component: () => import(/* webpackChunkName: "SourceCode" */ '../components/page/metrics/InfoFlow.vue'),
+                    meta: { title: '信息流度量' }
                 },
                 {
                     path: '/ControlFlow',
