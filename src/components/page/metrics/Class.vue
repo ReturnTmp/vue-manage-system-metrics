@@ -111,51 +111,6 @@
             </div>
         </el-card>
 
-        <el-card  class="box-card">
-            <el-collapse @change="handleChange">
-                <el-collapse-item title="HELP" name="1">
-                    <p style="margin-top: 20px; font-weight: bold;">详细的降低圈复杂度的方法：</p>
-
-                    <ul style="margin-top: 10px;">
-                        <li style="margin-top: 10px;">降低圈复杂度的方法
-                            <ul style="margin-top: 5px;">
-                                <li style="margin-top: 5px;">1.重构代码
-                                    <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">1.分解复杂函数：将复杂的函数分解成几个更小、更专一的函数。</li>
-                                        <li style="margin-top: 5px;">2.使用多态替代条件语句：在适用的情况下，可以通过多态来替代过多的if-else或switch-case语句。</li>
-                                    </ul>
-                                </li>
-                                <li style="margin-top: 5px;">2.简化条件逻辑
-                                    <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">1.简化条件表达式：通过逻辑运算简化复杂的条件表达式。</li>
-                                        <li style="margin-top: 5px;">2.避免嵌套控制流：减少if、for、while等控制流结构的嵌套深度。</li>
-                                    </ul>
-                                </li>
-                                <li style="margin-top: 5px;">3.使用设计模式
-                                    <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">1.策略模式：对于有多个分支的决策逻辑，可以使用策略模式将每个分支的逻辑封装到单独的类中。</li>
-                                        <li style="margin-top: 5px;">2.状态模式：对于复杂的状态机逻辑，使用状态模式可以帮助管理不同状态下的行为，降低复杂度。</li>
-                                    </ul>
-                                </li>
-                                <li style="margin-top: 5px;">4.优化循环和递归
-                                    <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">1.减少循环内部的决策逻辑：尽量保持循环体简洁，将复杂的逻辑移出循环。</li>
-                                        <li style="margin-top: 5px;">2.谨慎使用递归：递归可以使某些算法看起来更简洁，但也可能增加复杂度和资源消耗。在可能的情况下，考虑使用迭代代替递归。</li>
-                                    </ul>
-                                </li>
-                                <li style="margin-top: 5px;">5.增加代码的模块化
-                                    <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">1.模块化设计：通过模块化设计，将程序划分成高内聚、低耦合的模块，每个模块专注于完成一个具体的任务。</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                </el-collapse-item>
-            </el-collapse>
-        </el-card>
-
 
 
     </el-container>
