@@ -184,13 +184,13 @@ export default {
                 {
                     number: "3",
                     factor: "分布式数据处理",
-                    degree: "7",
+                    degree: "2",
                     iseditor: false
                 },
                 {
                     number: "4",
                     factor: "性能",
-                    degree: "6",
+                    degree: "3",
                     iseditor: false
                 },
                 {
@@ -208,7 +208,7 @@ export default {
                 {
                     number: "7",
                     factor: "多点运行",
-                    degree: "6",
+                    degree: "2",
                     iseditor: false
                 },
                 {
@@ -238,7 +238,7 @@ export default {
                 {
                     number: "12",
                     factor: "易安装性",
-                    degree: "7",
+                    degree: "3",
                     iseditor: false
                 },
                 {
@@ -250,7 +250,7 @@ export default {
                 {
                     number: "14",
                     factor: "易变性",
-                    degree: "6",
+                    degree: "1",
                     iseditor: false
                 }
             ],
