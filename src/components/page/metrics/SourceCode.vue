@@ -64,19 +64,20 @@
                         </div>
                     </el-card>
                 </el-col>
-                <el-col :span="4" class='col-box'>
-                    <el-card :body-style="{ padding: '0px' }">
-                        <div style="padding: 14px;">
-                            <i class="el-icon-s-opportunity" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+<!--                <el-col :span="4" class='col-box'>-->
+<!--                    <el-card :body-style="{ padding: '0px' }">-->
+<!--                        <div style="padding: 14px;">-->
+<!--                            <i class="el-icon-s-opportunity" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>-->
 
-                            <span style='font-size: 20px;font-weight: bold'>圈复杂度</span>
-                            <div class="bottom clearfix">
-                                {{tableData[0].cycleComplexity}}
-                            </div>
-                        </div>
-                    </el-card>
-                </el-col>
+<!--                            <span style='font-size: 20px;font-weight: bold'>圈复杂度</span>-->
+<!--                            <div class="bottom clearfix">-->
+<!--                                {{tableData[0].cycleComplexity}}-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </el-card>-->
+<!--                </el-col>-->
             </el-row>
+
         </el-card>
 
         <el-card class="box-card" v-if='tableData.length' style='width: 100%'>
@@ -103,6 +104,43 @@
                     注释比例良好提示：您的代码注释比例良好。当代码的注释比例良好时，注释既充分又高效地传达了代码的意图和复杂性。良好的注释提高了代码的可读性，简化了代码的维护，提高了项目的开发效率，有利于代码的可持续发展。
                 </p>
             </div>
+        </el-card>
+
+        <el-card  class="box-card">
+            <el-collapse @change="handleChange">
+                <el-collapse-item title="HELP" name="1">
+                    <p>代码的注释比例是衡量软件可理解性和可维护性的一个重要的指标。</p>
+                    <p>好的代码应该是自描述的，代码自己就已经说明问题了。在难以理解的地方才加上注释。</p>
+                    <p>好的注释应该具备以下几种特性：</p>
+                    <ul>
+                        <h2>清晰性</h2>
+                        <ul>
+                            <li>注释应该是清晰和简洁的，避免不必要的复杂性和冗长。</li>
+                            <li>使用简单直接的语言描述代码的目的和行为。</li>
+                        </ul>
+                        <h2>精确</h2>
+                        <ul>
+                            <li>注释应该准确反映代码的目的和功能。</li>
+                            <li>避免提供可能随时间变得不准确或误导性的信息。</li>
+                        </ul>
+                        <h2>相关性</h2>
+                        <ul>
+                            <li>注释应当与其描述的代码紧密相关，避免包含与代码无关的信息。</li>
+                            <li>聚焦于解释代码的“为什么”（即背后的逻辑或原因），而非“怎么做”的细节，后者应该通过清晰的代码表达。</li>
+                        </ul>
+                        <h2>必要性</h2>
+                        <ul>
+                            <li>只在必要时添加注释。过度的注释可能会干扰代码的阅读流程，而且维护注释也需要时间和资源。</li>
+                            <li>对于自解释的代码段，尽量避免添加注释。如果代码已经足够清晰，再添加注释可能会导致信息重复。</li>
+                        </ul>
+                        <h2>一致性</h2>
+                        <ul>
+                            <li>在整个代码库中使用一致的注释风格和约定，这包括注释的格式、位置和用词。</li>
+                            <li>团队应该共同决定注释的标准，并遵守这些标准以保持代码库的一致性。</li>
+                        </ul>
+                    </ul>
+                </el-collapse-item>
+            </el-collapse>
         </el-card>
 
     </el-container>

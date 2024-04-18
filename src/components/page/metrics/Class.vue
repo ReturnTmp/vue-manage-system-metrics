@@ -6,24 +6,6 @@
             <p>在本页面设置各类功能点数量和系统特征，将根据功能点度量的方法得出度量结果</p>
         </el-card>
 
-        <el-card class="box-card" style='width: 100%;display: flex'>
-
-            <el-upload
-                class="upload-demo"
-                :auto-upload="false"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :limit="1"
-                :file-list="fileList"
-                :on-change="onChange"
-                :on-exceed="onExceed">
-                <div style='display: flex'>
-                    <i class="el-icon-document-checked" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
-                    <div>点击选择要上传的文件（xml 文件）</div>
-                </div>
-            </el-upload>
-            <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>
-        </el-card>
-
 
         <el-card class="box-card">
             <el-steps :active="stepNumber" align-center>
@@ -98,7 +80,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="180">
-                        <template slot-scope="scope">
+                        <template slot-scope="scope">x
                             <el-button type="warning" @click="edit(scope.row, scope)">编辑</el-button>
                             <el-button type="danger" @click="save(scope.row)">保存</el-button>
                         </template>
@@ -129,107 +111,47 @@
             </div>
         </el-card>
 
-        <el-card  class="box-card" style='width: 100%' >
-            <el-empty v-if="!CKresList.length" description="请先上传文件"></el-empty>
-            <el-tabs v-if="CKresList.length" v-model="activeName" tab-position="left" style="width: 800px; height: 400px">
-                <el-tab-pane label="CK度量" name="first">
-                    <el-collapse v-for="(item,index) in CKresList" :key="index" v-model="activeNames" accordion>
-                        <el-collapse-item :title="item.name" :name="index">
-                            <div>
-                                <ul>
-                                    <li>WMC:{{ item.wmc }}</li>
-                                    <li>RFC:{{item.rfc}}</li>
-                                    <li>DIT:{{item.dit}}</li>
-                                    <li>NOC:{{item.noc}}</li>
-                                    <li>CBO:{{item.cbo}}</li>
-                                </ul>
-                            </div>
-                        </el-collapse-item>
-                    </el-collapse>
-                </el-tab-pane>
-                <el-tab-pane label="LK度量" name="second">
-                    <el-collapse v-for="(item,index) in LKresList" :key="index" v-model="activeNames" accordion>
-                        <el-collapse-item :title="item.name" :name="index">
-                            <div>
-                                <ul>
-                                    <li>CS:{{ item.cs }}</li>
-                                    <li>NOO:{{item.noo}}</li>
-                                    <li>NOA:{{item.noa}}</li>
-                                    <li>SI:{{item.si}}</li>
-                                </ul>
-                            </div>
-                        </el-collapse-item>
-                    </el-collapse>
-                </el-tab-pane>
-                <el-tab-pane label="类图统计" name="third">
-                    <el-table v-if="tableData.length"
-                              :data="tableData"
-                              style="width: 100%">
-                        <el-table-column
-                            prop="complex"
-                            label="复杂度（WMC+DIT）">
-                        </el-table-column>
-                        <el-table-column
-                            prop="inherit"
-                            label="继承关系（DIT+NOC）">
-                        </el-table-column>
-                        <el-table-column
-                            prop="couple"
-                            label="耦合度（CBO+RFC）">
-                        </el-table-column>
-                    </el-table>
-
-                </el-tab-pane>
-            </el-tabs>
-
-        </el-card>
-
         <el-card  class="box-card">
             <el-collapse @change="handleChange">
                 <el-collapse-item title="HELP" name="1">
-                    <p style="font-weight: bold; color: #333;">我们规定圈复杂度在[1, 10]之间为良好，[11, +∞]为过大。</p>
-
-                    <p style="margin-top: 20px;">圈复杂度良好提示：该模块圈复杂度良好，表示该模块复杂程度适中。</p>
-
-                    <p style="margin-top: 20px;">圈复杂度过大提示：该模块圈复杂度过大。一个模块过于复杂可能会带来软件阅读和理解难度增加、维护成本提高、测试难度增加、可靠性下降等问题。您可以考虑通过重构代码、简化条件逻辑、增加代码的模块化等方式来降低模块的复杂度。详细的降低圈复杂度的方法见<a href="#">这里</a>。</p>
-
                     <p style="margin-top: 20px; font-weight: bold;">详细的降低圈复杂度的方法：</p>
 
                     <ul style="margin-top: 10px;">
                         <li style="margin-top: 10px;">降低圈复杂度的方法
                             <ul style="margin-top: 5px;">
-                                <li style="margin-top: 5px;">重构代码
+                                <li style="margin-top: 5px;">1.重构代码
                                     <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">分解复杂函数：将复杂的函数分解成几个更小、更专一的函数。</li>
-                                        <li style="margin-top: 5px;">使用多态替代条件语句：在适用的情况下，可以通过多态来替代过多的if-else或switch-case语句。</li>
+                                        <li style="margin-top: 5px;">1.分解复杂函数：将复杂的函数分解成几个更小、更专一的函数。</li>
+                                        <li style="margin-top: 5px;">2.使用多态替代条件语句：在适用的情况下，可以通过多态来替代过多的if-else或switch-case语句。</li>
                                     </ul>
                                 </li>
-                                <li style="margin-top: 5px;">简化条件逻辑
+                                <li style="margin-top: 5px;">2.简化条件逻辑
                                     <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">简化条件表达式：通过逻辑运算简化复杂的条件表达式。</li>
-                                        <li style="margin-top: 5px;">避免嵌套控制流：减少if、for、while等控制流结构的嵌套深度。</li>
+                                        <li style="margin-top: 5px;">1.简化条件表达式：通过逻辑运算简化复杂的条件表达式。</li>
+                                        <li style="margin-top: 5px;">2.避免嵌套控制流：减少if、for、while等控制流结构的嵌套深度。</li>
                                     </ul>
                                 </li>
-                                <li style="margin-top: 5px;">使用设计模式
+                                <li style="margin-top: 5px;">3.使用设计模式
                                     <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">策略模式：对于有多个分支的决策逻辑，可以使用策略模式将每个分支的逻辑封装到单独的类中。</li>
-                                        <li style="margin-top: 5px;">状态模式：对于复杂的状态机逻辑，使用状态模式可以帮助管理不同状态下的行为，降低复杂度。</li>
+                                        <li style="margin-top: 5px;">1.策略模式：对于有多个分支的决策逻辑，可以使用策略模式将每个分支的逻辑封装到单独的类中。</li>
+                                        <li style="margin-top: 5px;">2.状态模式：对于复杂的状态机逻辑，使用状态模式可以帮助管理不同状态下的行为，降低复杂度。</li>
                                     </ul>
                                 </li>
-                                <li style="margin-top: 5px;">优化循环和递归
+                                <li style="margin-top: 5px;">4.优化循环和递归
                                     <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">减少循环内部的决策逻辑：尽量保持循环体简洁，将复杂的逻辑移出循环。</li>
-                                        <li style="margin-top: 5px;">谨慎使用递归：递归可以使某些算法看起来更简洁，但也可能增加复杂度和资源消耗。在可能的情况下，考虑使用迭代代替递归。</li>
+                                        <li style="margin-top: 5px;">1.减少循环内部的决策逻辑：尽量保持循环体简洁，将复杂的逻辑移出循环。</li>
+                                        <li style="margin-top: 5px;">2.谨慎使用递归：递归可以使某些算法看起来更简洁，但也可能增加复杂度和资源消耗。在可能的情况下，考虑使用迭代代替递归。</li>
                                     </ul>
                                 </li>
-                                <li style="margin-top: 5px;">增加代码的模块化
+                                <li style="margin-top: 5px;">5.增加代码的模块化
                                     <ul style="margin-top: 5px;">
-                                        <li style="margin-top: 5px;">模块化设计：通过模块化设计，将程序划分成高内聚、低耦合的模块，每个模块专注于完成一个具体的任务。</li>
+                                        <li style="margin-top: 5px;">1.模块化设计：通过模块化设计，将程序划分成高内聚、低耦合的模块，每个模块专注于完成一个具体的任务。</li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+
                 </el-collapse-item>
             </el-collapse>
         </el-card>
