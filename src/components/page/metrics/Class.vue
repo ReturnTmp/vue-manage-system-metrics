@@ -20,8 +20,8 @@
                 <el-table :data="tableDataUFC" border style="width: 100%">
                     <el-table-column prop="measurementElements" label="测量元素" width="180">
                         <template slot-scope="scope">
-                            <input type="text" v-model="scope.row.measurementElements" v-show="scope.row.iseditor" />
-                            <span v-show="!scope.row.iseditor">{{scope.row.measurementElements}}</span>
+<!--                            <input type="text" v-model="scope.row.measurementElements" v-show="scope.row.iseditor" />-->
+                            <span>{{scope.row.measurementElements}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column prop="Simple" label="Simple" width="180">
@@ -63,14 +63,14 @@
                 <el-table :data="tableDataVAF" border style="width: 100%">
                     <el-table-column prop="number" label="序号" width="300">
                         <template slot-scope="scope">
-                            <input type="text" v-model="scope.row.number" v-show="scope.row.iseditor" />
-                            <span v-show="!scope.row.iseditor">{{scope.row.number}}</span>
+<!--                            <input type="text" v-model="scope.row.number" v-show="scope.row.iseditor" />-->
+                            <span>{{scope.row.number}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column prop="factor" label="技术复杂度因子" width="300">
                         <template slot-scope="scope">
-                            <input type="text" v-model="scope.row.factor" v-show="scope.row.iseditor" />
-                            <span v-show="!scope.row.iseditor">{{scope.row.factor}}</span>
+<!--                            <input type="text" v-model="scope.row.factor" v-show="scope.row.iseditor" />-->
+                            <span>{{scope.row.factor}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column prop="degree" label="影响程度">
