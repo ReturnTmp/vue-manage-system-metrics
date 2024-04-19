@@ -24,6 +24,24 @@
             <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>
         </el-card>
 
+        <el-card class="box-card" style='width: 100%;display: flex'>
+            <el-upload
+                class="upload-demo"
+                :auto-upload="false"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :limit="1"
+                :file-list="fileList"
+                :on-change="onChange"
+                :on-exceed="onExceed">
+                <div style='display: flex'>
+                    <i class="el-icon-document-checked" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
+                    <div>点击选择要上传源代码（txt 文件）</div>
+                </div>
+            </el-upload>
+            <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>
+        </el-card>
+
+
         <el-card  v-if="!CKresList.length" class="box-card"style='width: 100%' >
             <el-empty  description="请先上传文件"></el-empty>
         </el-card>
