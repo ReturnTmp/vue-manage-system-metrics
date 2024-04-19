@@ -1,8 +1,8 @@
 <template>
     <el-container style='display: block'>
         <el-card class="box-card" style='line-height: 30px'>
-            <h3>功能点度量页面</h3>
-            <p>在本页面设置各类功能点数量和系统特征，将根据功能点度量的方法得出度量结果</p>
+            <h3>信息流度量页面</h3>
+            <p>在本页面中上传源代码，我们将根据信息流度量的方法得出度量结果</p>
         </el-card>
 
         <el-card class="box-card" style='width: 100%;display: flex'>

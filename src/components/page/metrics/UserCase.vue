@@ -1,8 +1,8 @@
 <template>
     <el-container style='display: block'>
         <el-card class="box-card" style='line-height: 30px'>
-            <h3>功能点度量页面</h3>
-            <p>在本页面设置各类功能点数量和系统特征，将根据功能点度量的方法得出度量结果</p>
+            <h3>用例点度量页面</h3>
+            <p>在本页面中上传用例图，并填写每个角色和用例的权重、技术复杂性因素、环境因素，我们将根据用例度量的方法得出度量结果，并帮您预测工作量和工作时间</p>
         </el-card>
 
         <el-card class="box-card" style='width: 100%;display: flex'>
