@@ -29,13 +29,13 @@
         </el-card>
 
         <el-card  class="box-card" v-if="CKresList.length" style='width: 100%' >
-<!--            <div style="height:500px;width: 100%;" ref="mainck"></div>-->
+            <!--            <div style="height:500px;width: 100%;" ref="mainck"></div>-->
             <div style="height:500px;width: 100%;" ref="mainChart"></div>
         </el-card>
 
-<!--        <el-card  class="box-card" v-if="LKresList.length" style='width: 100%' >-->
-<!--            <div style="height:500px;width: 100%;" ref="mainlk"></div>-->
-<!--        </el-card>-->
+        <!--        <el-card  class="box-card" v-if="LKresList.length" style='width: 100%' >-->
+        <!--            <div style="height:500px;width: 100%;" ref="mainlk"></div>-->
+        <!--        </el-card>-->
 
         <el-card class="box-card" style='width: 100%;display: flex'>
             <el-table v-if="CKAndLKList.length"
@@ -89,32 +89,32 @@
             </el-table>
         </el-card>
 
-<!--        <el-card class="box-card" style='width: 100%;display: flex'>-->
-<!--            <el-table v-if="LKresList.length"-->
-<!--                      :data="LKresList"-->
-<!--                      style="width: 100%">-->
-<!--                <el-table-column-->
-<!--                    prop="name"-->
-<!--                    label="类名">-->
-<!--                </el-table-column>-->
-<!--                <el-table-column-->
-<!--                    prop="cs"-->
-<!--                    label="CS">-->
-<!--                </el-table-column>-->
-<!--                <el-table-column-->
-<!--                    prop="noo"-->
-<!--                    label="NOO">-->
-<!--                </el-table-column>-->
-<!--                <el-table-column-->
-<!--                    prop="noa"-->
-<!--                    label="NOA">-->
-<!--                </el-table-column>-->
-<!--                <el-table-column-->
-<!--                    prop="si"-->
-<!--                    label="SI">-->
-<!--                </el-table-column>-->
-<!--            </el-table>-->
-<!--        </el-card>-->
+        <!--        <el-card class="box-card" style='width: 100%;display: flex'>-->
+        <!--            <el-table v-if="LKresList.length"-->
+        <!--                      :data="LKresList"-->
+        <!--                      style="width: 100%">-->
+        <!--                <el-table-column-->
+        <!--                    prop="name"-->
+        <!--                    label="类名">-->
+        <!--                </el-table-column>-->
+        <!--                <el-table-column-->
+        <!--                    prop="cs"-->
+        <!--                    label="CS">-->
+        <!--                </el-table-column>-->
+        <!--                <el-table-column-->
+        <!--                    prop="noo"-->
+        <!--                    label="NOO">-->
+        <!--                </el-table-column>-->
+        <!--                <el-table-column-->
+        <!--                    prop="noa"-->
+        <!--                    label="NOA">-->
+        <!--                </el-table-column>-->
+        <!--                <el-table-column-->
+        <!--                    prop="si"-->
+        <!--                    label="SI">-->
+        <!--                </el-table-column>-->
+        <!--            </el-table>-->
+        <!--        </el-card>-->
 
         <el-card class="box-card">
             <el-collapse @change="handleChange">
@@ -123,38 +123,38 @@
                         <h2>1. CK度量阈值建议</h2>
                         <ol>
                             <li>
-                                <strong>a) 类的加权方法数 (WMC):</strong> 一个较高的WMC值表明类可能过于复杂，难以理解和测试。通常认为，WMC超过20可能是一个警示信号，但这取决于方法的实际复杂度。
+                                <strong>a) WMC(类的加权方法数):</strong> 一个较高的WMC值表明类可能过于复杂，难以理解和测试。通常认为，WMC超过20可能是一个警示信号，但这取决于方法的实际复杂度。
                             </li>
                             <li>
-                                <strong>b) 深度继承树 (DIT):</strong> DIT值过高（例如，超过5）可能表明过度的继承，这可能导致代码难以理解和维护。
+                                <strong>b) DIT(继承树的深度):</strong> DIT值过高（例如，超过5）可能表明过度的继承，这可能导致代码难以理解和维护。
                             </li>
                             <li>
-                                <strong>c) 子类数量 (NOC):</strong> 较高的NOC值（如超过10）可能表示类的职责过多，可能需要进一步分解。
+                                <strong>c) NOC(子类数量):</strong> 较高的NOC值（如超过10）可能表示类的职责过多，可能需要进一步分解。
                             </li>
                             <li>
-                                <strong>d) 耦合程度 (CBO):</strong> CBO值超过10通常被视为高耦合，应考虑降低耦合。
+                                <strong>d) CBO(对象之间的耦合程度):</strong> CBO值超过10通常被视为高耦合，应考虑降低耦合。
                             </li>
                             <li>
-                                <strong>e) 响应集 (RFC):</strong> 如果RFC超过50，可能表明类与系统的其他部分交互过于频繁，可能需要重新设计接口。
+                                <strong>e) RFC(类的响应集):</strong> 如果RFC超过50，可能表明类与系统的其他部分交互过于频繁，可能需要重新设计接口。
                             </li>
                             <li>
-                                <strong>f) 缺乏内聚力 (LCOM):</strong> LCOM较高（接近1）意味着类中的方法几乎没有共享数据，类的内聚性差，可能需要重构。
+                                <strong>f) LCOM(类内聚缺乏度):</strong> LCOM较高（接近1）意味着类中的方法几乎没有共享数据，类的内聚性差，可能需要重构。
                             </li>
                             <li></li>
                         </ol>
                         <h2>2. LK度量阈值建议</h2>
                         <ul>
                             <li>
-                                <strong>a) CS（类大小）:</strong> 通常认为，一个类的代码行数不应超过几百行，具体数字可能因语言和项目类型而异。例如，超过200行可能需要审查和可能的重构。
+                                <strong>a) CS（类规模）:</strong> CS可以通过类中定义的方法的总数或者属性的总数来衡量，CS值过大反映出类承载的责任较多，在必要时考虑对富有多种职责的类进行分解。
                             </li>
                             <li>
-                                <strong>b) NOO（操作重载度）:</strong> 较高的NOO可能表明过度使用继承，如果NOO接近父类的操作总数，可能表明设计上的问题。
+                                <strong>b) NOO（方法重写数）:</strong> NOO值过大意味着类的设计可能存在问题，有可能是父类的抽象做的不好。
                             </li>
                             <li>
-                                <strong>c) NOA（属性数）:</strong> 属性数量过多（例如超过10-15）可能表明类的职责过于庞大，考虑是否违反了单一职责原则。
+                                <strong>c) NOA（增加方法数）:</strong> NOA值过大意味着子类与父类（尤其祖先类）的特征相差越来越大。随着继承深度越来越深，NOA的值应该越小越好。
                             </li>
                             <li>
-                                <strong>d) SI（专用性指数）:</strong> 没有固定的好坏标准，但是一个较高的SI值需要特别关注，因为它可能表明类的设计高度依赖继承。
+                                <strong>d) SI（特征化指数）:</strong> 特征化指数SI用来度量每一个子类在类图设计中的特征化等级，属于间接测量的综合指标。SI体现了这个类的个性，SI值过大，说明类不符合抽象层次结构。
                             </li>
                         </ul>
                     </div>
