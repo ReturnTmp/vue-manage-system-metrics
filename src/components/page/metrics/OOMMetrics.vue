@@ -30,15 +30,15 @@
                 :auto-upload="false"
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :limit="1"
-                :file-list="fileList"
-                :on-change="onChange"
-                :on-exceed="onExceed">
+                :file-list="fileListTXT"
+                :on-change="onChangeTXT"
+                :on-exceed="onExceedTXT">
                 <div style='display: flex'>
                     <i class="el-icon-document-checked" style='font-size: 20px;margin-top: 10px;margin-left: 20px;margin-right: 10px'></i>
                     <div>点击选择要上传源代码（txt 文件）</div>
                 </div>
             </el-upload>
-            <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>
+<!--            <el-button style='margin-top: 10px' class="submit" type="primary" @click="uploadFile">上传文件</el-button>-->
         </el-card>
 
 
@@ -191,6 +191,7 @@ export default {
     data() {
         return {
             fileList: [],
+            fileListTXT: [],
             activeNames: ['1'],
             activeName: 'first',
             CKresList: [],
@@ -386,6 +387,11 @@ export default {
             console.log(fileList);
             this.fileList = fileList;
         },
+        onChangeTXT(file,fileList){
+            console.log(file);
+            console.log(fileList);
+            this.fileListTXT = fileList;
+        },
         async uploadFile(){
             let formData = new FormData();
             for (let i in this.fileList) {
@@ -442,6 +448,11 @@ export default {
         onExceed(files,fileList){
             this.fileList.pop();
             this.fileList.push(files[0]);
+        },
+        // 溢出则替换
+        onExceedTXT(files,fileList){
+            this.fileListTXT.pop();
+            this.fileListTXT.push(files[0]);
         },
         // 点击折叠面板出现的值
         handleChange(val){
